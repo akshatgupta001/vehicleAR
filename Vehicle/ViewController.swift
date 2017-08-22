@@ -8,16 +8,20 @@
 
 import UIKit
 import ARKit
+import CoreMotion
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
     let configuration = ARWorldTrackingSessionConfiguration()
+    let motionManager = CMMotionManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         self.configuration.planeDetection = .horizontal
         self.sceneView.session.run(configuration)
         self.sceneView.delegate = self
+        self.setUpAccelerometer()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -71,13 +75,41 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let orientation = SCNVector3(-transform.m31,-transform.m32,-transform.m33)
         let location = SCNVector3(transform.m41,transform.m42,transform.m43)
         let currentPositionOfCamera = orientation + location
-        let box = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
-        box.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
-        box.position = currentPositionOfCamera
-        let body = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: box, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
-        box.physicsBody = body
-
-        self.sceneView.scene.rootNode.addChildNode(box)
+        
+        let scene = SCNScene(named: "Car-Scene.scn")
+        let frame = (scene?.rootNode.childNode(withName: "frame", recursively: false))!
+        
+        
+        frame.position = currentPositionOfCamera
+        let body = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: frame, options: [SCNPhysicsShape.Option.keepAsCompound: true]))
+        frame.physicsBody = body
+        self.sceneView.scene.rootNode.addChildNode(frame)
+    }
+    
+    func setUpAccelerometer() {
+        
+        if motionManager.isAccelerometerAvailable {
+            motionManager.accelerometerUpdateInterval = 1/60
+            motionManager.startAccelerometerUpdates(to: .main, withHandler: { (accelerometerData, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                self.accelerometerDidChange(acceleration: accelerometerData!.acceleration)
+            })
+            
+        } else {
+            print("accelerometer not available")
+        }
+        
+        
+    }
+    
+    func accelerometerDidChange(acceleration: CMAcceleration) {
+        
+        print(acceleration.x)
+        print(acceleration.y)
+        
     }
     
 }

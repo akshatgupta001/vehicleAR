@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B05EE7A1F4C77BC00E6F8F4 /* Car-Scene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 0B05EE791F4C77BC00E6F8F4 /* Car-Scene.scn */; };
 		0B3D2DC61F439E2D002D7D1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3D2DC51F439E2D002D7D1C /* AppDelegate.swift */; };
 		0B3D2DC81F439E2D002D7D1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3D2DC71F439E2D002D7D1C /* ViewController.swift */; };
 		0B3D2DCB1F439E2D002D7D1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DC91F439E2D002D7D1C /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B05EE791F4C77BC00E6F8F4 /* Car-Scene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Car-Scene.scn"; sourceTree = "<group>"; };
 		0B3D2DC21F439E2D002D7D1C /* Vehicle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vehicle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3D2DC51F439E2D002D7D1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B3D2DC71F439E2D002D7D1C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				0B3D2DCC1F439E2D002D7D1C /* Assets.xcassets */,
 				0B3D2DCE1F439E2D002D7D1C /* LaunchScreen.storyboard */,
 				0B3D2DD11F439E2D002D7D1C /* Info.plist */,
+				0B05EE791F4C77BC00E6F8F4 /* Car-Scene.scn */,
 			);
 			path = Vehicle;
 			sourceTree = "<group>";
@@ -96,6 +99,7 @@
 				TargetAttributes = {
 					0B3D2DC11F439E2D002D7D1C = {
 						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -122,6 +126,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B05EE7A1F4C77BC00E6F8F4 /* Car-Scene.scn in Resources */,
 				0B3D2DD01F439E2D002D7D1C /* LaunchScreen.storyboard in Resources */,
 				0B3D2DCD1F439E2D002D7D1C /* Assets.xcassets in Resources */,
 				0B3D2DCB1F439E2D002D7D1C /* Main.storyboard in Resources */,
@@ -273,11 +278,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VSKQF4Y8J8;
 				INFOPLIST_FILE = "$(SRCROOT)/Vehicle/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Reveal-Inc.Planets";
+				PRODUCT_BUNDLE_IDENTIFIER = helllocube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -287,11 +295,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VSKQF4Y8J8;
 				INFOPLIST_FILE = "$(SRCROOT)/Vehicle/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Reveal-Inc.Planets";
+				PRODUCT_BUNDLE_IDENTIFIER = helllocube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
