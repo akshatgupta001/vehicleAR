@@ -16,7 +16,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     let motionManager = CMMotionManager()
     var vehicle = SCNPhysicsVehicle()
     var orientation: CGFloat = 0
-    var touched: Bool = false
+    var accelerationValues = [UIAccelerationValue(0), UIAccelerationValue(0)]
+    var touched: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
@@ -34,10 +35,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.touched = true
+        guard let _ = touches.first else {return}
+        self.touched += touches.count
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.touched = false
+        self.touched = 0
     }
     
     func createConcrete(planeAnchor: ARPlaneAnchor) -> SCNNode {
@@ -110,15 +112,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didSimulatePhysicsAtTime time: TimeInterval) {
       //  print("simulating physics")
         var engineForce: CGFloat = 0
+        var brakingForce: CGFloat = 0
         self.vehicle.setSteeringAngle(-orientation, forWheelAt: 2)
         self.vehicle.setSteeringAngle(-orientation, forWheelAt: 3)
-        if self.touched == true {
+        if self.touched == 1 {
             engineForce = 5
-        } else {
+        } else if self.touched == 2 {
+            engineForce = -5
+        } else if self.touched == 3 {
+            brakingForce = 100
+        }
+        else {
             engineForce = 0
         }
         self.vehicle.applyEngineForce(engineForce, forWheelAt: 0)
         self.vehicle.applyEngineForce(engineForce, forWheelAt: 1)
+        self.vehicle.applyBrakingForce(brakingForce, forWheelAt: 0)
+        self.vehicle.applyBrakingForce(brakingForce, forWheelAt: 1)
+
 
         
 
@@ -143,14 +154,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func accelerometerDidChange(acceleration: CMAcceleration) {
-        
-        if acceleration.x > 0 {
-            self.orientation = -CGFloat(acceleration.y)
+        accelerationValues[1] = filtered(currentAcceleration: accelerationValues[1], UpdatedAcceleration: acceleration.y)
+        accelerationValues[0] = filtered(currentAcceleration: accelerationValues[0], UpdatedAcceleration: acceleration.x)
+        if accelerationValues[0] > 0 {
+            self.orientation = -CGFloat(accelerationValues[1])
         } else {
-            self.orientation = CGFloat(acceleration.y)
+            self.orientation = CGFloat(accelerationValues[1])
         }
         
     }
+    func filtered(currentAcceleration: Double, UpdatedAcceleration: Double) -> Double {
+        let kfilteringFactor = 0.5
+        return UpdatedAcceleration * kfilteringFactor + currentAcceleration * (1-kfilteringFactor)
+    }
+
     
 }
 
