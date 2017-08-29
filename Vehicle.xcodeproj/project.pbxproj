@@ -283,7 +283,7 @@
 				DEVELOPMENT_TEAM = VSKQF4Y8J8;
 				INFOPLIST_FILE = "$(SRCROOT)/Vehicle/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = helllocube;
+				PRODUCT_BUNDLE_IDENTIFIER = hellllocube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -300,7 +300,7 @@
 				DEVELOPMENT_TEAM = VSKQF4Y8J8;
 				INFOPLIST_FILE = "$(SRCROOT)/Vehicle/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = helllocube;
+				PRODUCT_BUNDLE_IDENTIFIER = hellllocube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
